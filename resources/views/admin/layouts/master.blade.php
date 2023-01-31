@@ -75,7 +75,7 @@
                                 </button> --}}
                             </form>
                             <div class="header-button">
-                                {{-- <div class="noti-wrap">
+                                <div class="noti-wrap">
                                     <div class="noti__item js-item-menu">
                                         <i class="zmdi zmdi-notifications"></i>
                                         <span class="quantity">3</span>
@@ -115,7 +115,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div> --}}
+                                </div>
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
@@ -143,11 +143,15 @@
                                                     <a href="#">
                                                         <i class="zmdi zmdi-account"></i>Account</a>
                                                 </div>
+                                                <div class="account-dropdown__item">
+                                                    <a href=" {{route('admin#changePasswordPage')}} ">
+                                                        <i class="fa-solid fa-key"></i>Change Password</a>
+                                                </div>
                                             </div>
                                             <div class="account-dropdown__footer">
                                                 <form action=" {{route('logout')}} " method="post" class="text-center my-3">
                                                     @csrf
-                                                    <button type="submit"><i class="zmdi zmdi-power"></i> Logout</a></button>
+                                                    <button type="submit"><i class="zmdi zmdi-power mr-2"></i> Logout</a></button>
                                                 </form>
                                                     
                                             </div>

@@ -14,7 +14,7 @@ class CategoryController extends Controller
                   when(request('key'), function($query){
                     $query->where('name', 'like', '%'.request('key').'%');
                   })
-                  ->orderBy('category_id','desc')
+                  ->orderBy('id','desc')
                   ->paginate(5);
           $categories->appends(request()->all());        
           return view('admin.category.list', compact('categories'));
@@ -35,15 +35,28 @@ class CategoryController extends Controller
 
     // delete category
     public function delete($id) {
-        // dd($id);
-        Category::where('category_id', $id)->delete();
+        Category::where('id', $id)->delete();
         return back()->with(['deleteSuccess'=>'Category Deleted...']);
+    }
+
+    //edit page
+    public function edit($id) {
+        $category = Category::where('id', $id)->first();
+        return view('admin.category.edit', compact('category'));
+    }
+
+    // update page
+    public function update(Request $request) {
+        $this->categoryValidationCheck($request);
+        $data = $this -> requestCategoryData($request);
+        Category::where('id', $request->categoryId)->update($data);
+        return redirect()->route("category#list");
     }
 
     //category validation check
     private function categoryValidationCheck($request) {
         Validator::make($request->all(),[
-            'categoryName' => 'required|unique:categories,name'
+            'categoryName' => 'required|unique:categories,name,'.$request->categoryId
         ])->validate();
     }
 
