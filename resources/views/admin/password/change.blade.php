@@ -14,26 +14,40 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title">
-                            <h3 class="text-center title-2">Create Your Category</h3>
+                            <h3 class="text-center title-2">Change Your Password</h3>
                         </div>
+                        @if(session('changeSuccess'))
+                            <div class="col-12">
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <i class="fa-solid fa-check mr-2"></i> {{ session('changeSuccess') }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </div>                   
+                        @endif
+                        @if(session('notMatch'))
+                            <div class="col-12">
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <i class="fa-solid fa-triangle-exclamation mr-2"></i> {{ session('notMatch') }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </div>                   
+                        @endif
                         <hr>
                         <form action=" {{route('admin#changePassword')}} " method="post" novalidate="novalidate">
                             @csrf
                             <div class="form-group">
                                 <label class="control-label mb-1">Old Password</label>
-                                <input name="oldPassword" type="password" aria-required="true" aria-invalid="false" placeholder="Enter Old Password..." value="{{old('oldPassword')}}" class="form-control @if(session('notMatch')) is-invalid  @endif @error('oldPassword') is-invalid @enderror">
-
-                                @error('oldPassword')
+                                <input name="oldPassword" type="password" aria-required="true" aria-invalid="false" placeholder="Enter Old Password..." value="{{old('oldPassword')}}" class="form-control @error('oldPassword') is-invalid @enderror">
+                                
+                                @error('oldPassword"')
                                     <div class='invalid-feedback'>
                                         {{ $message }}
                                     </div>
                                 @enderror
-                                @if (session('notMatch'))
-                                    <div class="invalid-feedback">
-                                        {{session('notMatch')}}
-                                    </div>
-                                    
-                                @endif
                             </div>
 
                             <div class="form-group">

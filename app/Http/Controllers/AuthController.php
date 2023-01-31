@@ -45,7 +45,6 @@ class AuthController extends Controller
 
         $this->passwordValidationCheck($request);
         $user = User::select('password')->where('id', Auth::user()->id)->first();
-        $dbPassword = $user->password;
         $dbHashValue = $user->password; // hash value
         if(Hash::check($request->oldPassword, $dbHashValue)) {
             $data = [
@@ -53,11 +52,13 @@ class AuthController extends Controller
             ];
             User::where('id', Auth::user()->id)->update($data);
             
-            Auth::logout();
-            return redirect()->route("auth#loginPage");
+            // Auth::logout();
+            // return redirect()->route('category#list');
+            return back()->with(['changeSuccess'=>'password Change Success...']);
+
         }
 
-        return back()->with(['notMatch'=>'The old password not match. try Again!']);
+        return back()->with(['notMatch'=>'The old password does not match. try Again!']);
     }
 
     // password validation check
@@ -76,7 +77,6 @@ class AuthController extends Controller
             'newPassword.min' => 'password အသစ် အနည်းဆုံး ၆ လုံးပြည့်အောင် ထည့်ရန်',
             'newPassword.max' => 'password အသစ် ၁၀ လုံးထက် များအောင် မထည့်ရန်',
             'confirmPassword.min' => 'အပေါ်က password အသစ်ပုံစံအတိုင်း အနည်းဆုံး ၆ လုံးပြည့်အောင် ထည့်ရန်',
-            'confirmPassword.same' => 'Password အသစ်နှင့် တူညီခြင်းမရှိသဖြင့်  နောက်တကြိမ် ကြိုးစားပါ။'
 
         ])->validate();
     }

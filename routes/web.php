@@ -14,8 +14,7 @@ Route::get('loginPage', [AuthController::class, 'loginPage'])->name('auth#loginP
 Route::get('registerPage', [AuthController::class, 'registerPage'])->name('auth#registerPage');
 
 
-Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'
-])->group(function () {
+Route::middleware(['auth'])->group(function () {
 
     // dashboard 
     Route::get('dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
