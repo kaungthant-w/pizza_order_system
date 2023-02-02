@@ -31,10 +31,12 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-4 offset-2 mt-3">
+                            <div class="col-4 offset-1 mt-3">
                                 <button class="btn bg-dark text-white">
                                     <div class="fa-solid fa-pen-to-square me-2">
-                                        Edit Profile
+                                        <a href=" {{route('admin#edit')}} ">
+                                            Edit Profile
+                                        </a>
                                     </div>
                                 </button>
                             </div>

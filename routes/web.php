@@ -39,11 +39,12 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('admin')->group(function() {
 
         //password
-        Route::get('password/changePage', [AuthController::class, 'changePasswordPage'])->name('admin#changePasswordPage');
-        Route::post('change/password', [AuthController::class, 'changePassword'])->name('admin#changePassword');
+        Route::get('password/changePage', [AdminController::class, 'changePasswordPage'])->name('admin#changePasswordPage');
+        Route::post('change/password', [AdminController::class, 'changePassword'])->name('admin#changePassword');
 
         //profile
         Route::get('details', [AdminController::class, 'details'])->name('admin#details');
+        Route::get('edit', [AdminController::class, 'edit'])->name('admin#edit');
         
     });
    
