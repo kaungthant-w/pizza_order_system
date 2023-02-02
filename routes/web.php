@@ -1,6 +1,8 @@
 <?php
 
 // use auth;
+
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -35,8 +37,14 @@ Route::middleware(['auth'])->group(function () {
 
     // admin account 
     Route::prefix('admin')->group(function() {
+
+        //password
         Route::get('password/changePage', [AuthController::class, 'changePasswordPage'])->name('admin#changePasswordPage');
         Route::post('change/password', [AuthController::class, 'changePassword'])->name('admin#changePassword');
+
+        //profile
+        Route::get('details', [AdminController::class, 'details'])->name('admin#details');
+        
     });
    
 });

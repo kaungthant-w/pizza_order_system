@@ -32,7 +32,7 @@ class AuthController extends Controller
 
     //change password page
     public function changePasswordPage(){
-        return view('admin.password.change');
+        return view('admin.account.changePassword');
     }
 
     //change password
@@ -54,11 +54,11 @@ class AuthController extends Controller
             
             // Auth::logout();
             // return redirect()->route('category#list');
-            return back()->with(['changeSuccess'=>'password Change Success...']);
+            return back()->with(['changeSuccess'=>'password ပြောင်းလဲခြင်း အောင်မြင်ပါပြီ...']);
 
         }
 
-        return back()->with(['notMatch'=>'The old password does not match. try Again!']);
+        return back()->with(['notMatch'=>'Password မူရင်း နှင့် တူညီမှု မရှိပါ။ နောက်တစ်ကြိမ် ထပ်မံကြိုးစားကြည့်ပါ!']);
     }
 
     // password validation check
