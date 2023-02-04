@@ -47,6 +47,7 @@ Route::middleware(['auth'])->group(function () {
         //profile
         Route::get('details', [AdminController::class, 'details'])->name('admin#details');
         Route::get('edit', [AdminController::class, 'edit'])->name('admin#edit');
+        Route::post('update/{id}', [AdminController::class, 'update'])->name('admin#update');
         
     });
    

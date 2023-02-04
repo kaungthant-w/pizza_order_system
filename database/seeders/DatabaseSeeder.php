@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             'phone' => '09977241328',
             'address' => 'Sagaing',
             'role' => 'admin',
+            'gender' => 'male',
             'password' => Hash::make('password')
         ]);
 

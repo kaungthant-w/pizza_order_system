@@ -14,17 +14,18 @@
                         
                         <hr>
 
-                        <form action="">
+                        <form action=" {{route('admin#update',Auth::user()->id)}}" method="post" enctype="multipart/form-data">
+                            @csrf
                             <div class="row">
                                 <div class=" col-4 offset-1">
                                     @if(Auth::user()->image == null)
                                     <img src=" {{asset('img/default_user.png')}} " class="img-thumbnail shadow-sm">
                                     @else
-                                        <img src=" {{asset('admin/images/icon/avatar-01.jpg')}} ">  
+                                        <img src="{{asset('storage/'.Auth::user()->image)}}"/> 
                                     @endif
 
                                     <div class="mt-3">
-                                        <input type="file" class="form-control">
+                                        <input type="file" name="image" class="form-control">
                                     </div>
                                     <div class="mt-3">
                                         <button type="submit" class="btn bg-dark text-white"><i class="fa-solid fa-circle-chevron-right mr-2"></i>Update</button>
@@ -34,22 +35,59 @@
                                 <div class="row col-6 ">
                                     <div class="form-group">
                                         <label class="control-label mb-1">Name</label>
-                                        <input name="name" type="text" aria-required="true" aria-invalid="false" placeholder="Enter Admin Name..." value="{{old('name', Auth::user()->name)}}">
+                                        <input name="name" type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Enter Admin Name..." value="{{old('name', Auth::user()->name)}}">
+                                        @error('name')
+                                            <div class="invalid-feedback">
+                                                {{$message}}
+                                            </div>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label mb-1">Email</label>
-                                        <input name="email" type="email" aria-required="true" aria-invalid="false" placeholder="Enter Admin Email..." value="{{old('email', Auth::user()->email)}}">
+                                        <input name="email" type="email" class="form-control @error('email') is-invalid @enderror" aria-required="true" aria-invalid="false" placeholder="Enter Admin Email..." value="{{old('email', Auth::user()->email)}}">
+                                        @error('email')
+                                            <div class="invalid-feedback">
+                                                {{$message}}
+                                            </div>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <div class="form-group">
                                             <label class="control-label mb-1">Phone</label>
-                                            <input name="phone" type="number" aria-required="true" aria-invalid="false" placeholder="Enter Admin Phone..." value="{{old('phone', Auth::user()->phone)}}">
+                                            <input name="phone" type="number" class="form-control @error('phone') is-invalid @enderror" aria-required="true" aria-invalid="false" placeholder="Enter Admin Phone..." value="{{old('phone', Auth::user()->phone)}}">
+                                            @error('phone')
+                                                <div class="invalid-feedback">
+                                                    {{$message}}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <label class="control-label mb-1">Gender</label>
+                                            <select name="gender" class="form-control @error('gender') is-invalid @enderror" id="">
+                                                <option value="">Choose Gender...</option>
+                                                <option value="male" @if(Auth::user()->gender=='male') selected @endif>Male</option>
+                                                <option value="female" @if(Auth::user()->gender=='female') selected @endif>Female</option>
+                                            </select>
+
+                                            @error('gender')
+                                                <div class="invalid-feedback">
+                                                    {{$message}}
+                                                </div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="form-group">
                                             <label class="control-label mb-1">Address</label>
-                                            <textarea name="address" class="form-control" id="" cols="30" rows="10" placeholder="Enter Admin Address...">{{old('address', Auth::user()->address)}}</textarea>
+                                            <textarea name="address" class="form-control @error('address') is-invalid @enderror" id="" cols="30" rows="10" placeholder="Enter Admin Address...">{{old('address', Auth::user()->address)}}</textarea>
+
+                                            @error('address')
+                                                <div class="invalid-feedback">
+                                                    {{$message}}
+                                                </div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="form-group">
