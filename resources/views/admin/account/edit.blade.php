@@ -25,7 +25,12 @@
                                     @endif
 
                                     <div class="mt-3">
-                                        <input type="file" name="image" class="form-control">
+                                        <input type="file" name="image" class="form-control @error('image') is-invalid @enderror" >
+                                        @error('image')
+                                            <div class="invalid-feedback">
+                                                {{$message}}
+                                            </div>
+                                        @enderror
                                     </div>
                                     <div class="mt-3">
                                         <button type="submit" class="btn bg-dark text-white"><i class="fa-solid fa-circle-chevron-right mr-2"></i>Update</button>

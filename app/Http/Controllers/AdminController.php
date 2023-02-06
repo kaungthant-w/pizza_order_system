@@ -103,6 +103,7 @@ class AdminController extends Controller
             'email' => 'required',
             'gender' => 'required',
             'phone' => 'required',
+            'image' => 'mimes:png,jpg,jpeg|file',
             'address' => 'required',
         ], [
             'name.required' => 'name ထည့်ရန်',
