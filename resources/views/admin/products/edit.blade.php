@@ -15,21 +15,17 @@
     </div>
     <div class="section__content section__content--p30">
         <div class="container-fluid">
-            <div class="col-12 col-md-10 offset-2">
+            <div class="col-12 col-md-10 offset-1">
+                <div class="col-3 offset-10">
+                    <a href=" {{route('product#list')}} "><button class="btn bg-dark text-white my-3">List</button></a>
+                </div>
                 <div class="card">
                     <div class="card-body">
-                        <div class="">
+                        <div class="card-title">
                             {{-- <a href="product#list"> --}}
-                                <i class="fa-solid fa-arrow-left text-black" onclick="history.back()"></i>
+                                <i class="fa-solid fa-arrow-left text-black ml-3" onclick="history.back()"></i>
                             {{-- </a> --}}
                         </div>
-                        <div class="card-title">
-                            <h3 class="text-center title-2">Pizza Details</h3>
-                        </div>
-                        
-                        <hr>
-                        
-
                         <div class="row">
                             <div class="col-12 col-md-3 offset-1">
                                 <img src="{{asset('storage/'.$pizza->image)}}" class="img-thumbnail shadow-sm">
@@ -50,7 +46,7 @@
                                 <button class="btn bg-dark text-white">
                                     <div class="me-2">
                                         <i class="fa-solid fa-pen-to-square "></i>
-                                        <a href="{{route('admin#edit')}}" class="text-white">
+                                        <a href="" class="text-white">
                                             Edit Product
                                         </a>
                                     </div>

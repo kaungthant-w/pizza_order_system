@@ -10,7 +10,6 @@
                     <div class="table-data__tool-left">
                         <div class="overview-wrap">
                             <h2 class="title-1">Products List</h2>
-
                         </div>
                     </div>
                     <div class="table-data__tool-right">
@@ -91,13 +90,11 @@
                         </div>
                     @else
                     <p class="text-muted text-center mt-5">There is no Pizza Here...</p>
-
                     @endif
                 <!-- END DATA TABLE -->
             </div>
             <div class="mt-3">
                 {{ $pizzas->links() }}
-                {{-- {{$categories -> appends(request()->query())->links()}}; --}}
             </div>
         </div>
     </div>
