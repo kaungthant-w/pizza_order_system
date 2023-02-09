@@ -3,13 +3,15 @@
 
 <head>
     <meta charset="utf-8">
-    <title>MultiShop - Online Shop Website Template</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
 
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
+
+        <!-- Title Page-->
+        <title> @yield('title') </title>
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -36,7 +38,7 @@
             {{-- <div class="col-lg-3 d-none d-lg-block">
                 <span class="h3 text-uppercase text-dark bg-primary px-2 ml-n1">My Shop</span>
             </div>     --}}
-            <div class="col-lg-9">
+            <div class="col-lg-11">
                 <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
                     <a href="" class="text-decoration-none d-block d-lg-none">
                         <span class="h1 text-uppercase text-dark bg-light px-2">Multi</span>
@@ -47,31 +49,27 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
-                            <a href="shop.html" class="nav-item nav-link active">Home</a>
-                            <a href="cart.html" class="nav-item nav-link">My Cart</a>
-                            <a href="contact.html" class="nav-item nav-link">Contact</a>
+                            <a href="{{route('user#home')}}" class="nav-item nav-link active">Home</a>
+                            {{-- <a href="cart.html" class="nav-item nav-link">My Cart</a>
+                            <a href="contact.html" class="nav-item nav-link">Contact</a> --}}
                         </div>
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
-                            {{-- <a href="" class="btn px-0">
-                                <i class="fas fa-heart text-primary"></i>
-                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
-                            </a>
-                            <a href="" class="btn px-0 ml-3">
-                                <i class="fas fa-shopping-cart text-primary"></i>
-                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
-                            </a> --}}
-                            <a href="" class="btn px-0 ml-3 text-white">
-                                <i class="fa-solid fa-user"></i> {{Auth::user()->name}}
-                            </a>
+                            <div class="dropdown d-inline">
+                                <a href="#" class=" btn btn-dark text-white dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa-solid fa-user"></i> {{Auth::user()->name}}
+                                </a>
+                                <ul class="dropdown-menu me-5">
+                                    <li><a class="dropdown-item my-3" href=" {{route('user#accountChangePage')}} "> <i class="fa-solid fa-user"></i> Account</a></li>
+                                    <li><a class="dropdown-item my-3" href="{{route('user#changePasswordPage')}}"> <i class="fa-solid fa-key"></i> Change Password</a></li>
+                                    <li class="dropdown-item my-3">
+                                        <form action=" {{route('logout')}} " method="post" class="d-inline">
+                                            @csrf
+                                            <button type="submit" class="btn btn-dark text-white mr-2"> <i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
 
-                            <span class="text-white">|</span>
-
-                            <form action=" {{route('logout')}} " method="post" class="d-inline">
-                                @csrf
-                                <button type="submit" class="btn btn-dark text-white mr-2"> <i class="fa-solid fa-right-from-bracket"></i> Logout</button>
-                            </form>
-
-                            
                         </div>
                     </div>
                 </nav>

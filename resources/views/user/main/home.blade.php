@@ -1,27 +1,5 @@
-{{-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Home Page</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-
-</head>
-<body>
-    <div class="m-3">
-        <h1> Hello, I am admin category page </h1>
-        Role - {{Auth::user()->role}}   
-
-        <form action=" {{route('logout')}} " method="post">
-            @csrf
-            <input type="submit" class="btn btn-danger m-5" value="Logout">
-        </form>
-    </div>
-</body>
-</html> --}}
-
 @extends('user.layouts.master')
+@section('title', 'Home Page')
 @section('content')
     
     <!-- Shop Start -->
@@ -70,17 +48,8 @@
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Sorting</button>
                                     <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#">Latest</a>
-                                        <a class="dropdown-item" href="#">Popularity</a>
-                                        <a class="dropdown-item" href="#">Best Rating</a>
-                                    </div>
-                                </div>
-                                <div class="btn-group ml-2">
-                                    <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Showing</button>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#">10</a>
-                                        <a class="dropdown-item" href="#">20</a>
-                                        <a class="dropdown-item" href="#">30</a>
+                                        <a class="dropdown-item" href="#">Ascending</a>
+                                        <a class="dropdown-item" href="#">Descending</a>
                                     </div>
                                 </div>
                             </div>
