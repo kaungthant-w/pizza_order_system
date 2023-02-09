@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\User\UserController;
 use App\Models\Category;
 
 
@@ -49,6 +50,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('details', [AdminController::class, 'details'])->name('admin#details');
         Route::get('edit', [AdminController::class, 'edit'])->name('admin#edit');
         Route::post('update/{id}', [AdminController::class, 'update'])->name('admin#update');
+        Route::get('list', [AdminController::class, 'list'])->name('admin#list');
+        Route::get('delete/{id}', [AdminController::class, 'delete'])->name('admin#delete');
+        Route::get('changeRole/{id}', [AdminController::class, 'changeRole'])->name("admin#changeRole");
+        Route::post('change/role/{id}', [AdminController::class, 'change'])->name('admin#change');
         
     });
 
@@ -67,9 +72,7 @@ Route::middleware(['auth'])->group(function () {
     // user
     // home
     Route::group(['prefix' => 'user', 'middle'=>'user_auth'], function() {
-        Route::get('home', function() {
-            return view('user.home');
-        })->name("user#home");
+        Route::get('homePage', [UserController::class, 'home'])->name('user#home');
     });
 
 });

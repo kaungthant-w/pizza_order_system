@@ -123,10 +123,14 @@
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
-                                            @if (Auth::user()->image == null)
-                                                <img src=" {{asset('img/default_user.png')}} "/>
+                                            @if(Auth::user()->image == null)
+                                                @if (Auth::user()->gender == 'male')
+                                                    <img src="{{asset('img/default_user.png')}}" alt="" class="img-thumbnail">
+                                                @else
+                                                    <img src="{{asset('img/female_default.png')}}" alt="" class="img-thumbnail">    
+                                                @endif 
                                             @else
-                                                <img src="{{asset('storage/'.Auth::user()->image)}}"/>    
+                                                <img src="{{asset('storage/'.Auth::user()->image)}}" alt="" class="img-thumbnail"> 
                                             @endif
                                         </div>
                                         <div class="content">
@@ -135,10 +139,14 @@
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
                                                 <div class="image">
-                                                    @if (Auth::user()->image == null)
-                                                        <img src=" {{asset('img/default_user.png')}} "/>
+                                                    @if(Auth::user()->image == null)
+                                                    @if (Auth::user()->gender == 'male')
+                                                        <img src="{{asset('img/default_user.png')}}" alt="" class="img-thumbnail">
                                                     @else
-                                                        <img src="{{asset('storage/'.Auth::user()->image)}}"/>   
+                                                        <img src="{{asset('img/female_default.png')}}" alt="" class="img-thumbnail">    
+                                                    @endif 
+                                                    @else
+                                                        <img src="{{asset('storage/'.Auth::user()->image)}}" alt="" class="img-thumbnal shadow-sm"> 
                                                     @endif
                                                 </div>
                                                 <div class="content">
@@ -152,6 +160,10 @@
                                                 <div class="account-dropdown__item">
                                                     <a href=" {{route('admin#details')}} ">
                                                         <i class="zmdi zmdi-account"></i>Account</a>
+                                                </div>
+                                                <div class="account-dropdown__item">
+                                                    <a href=" {{route('admin#list')}} ">
+                                                        <i class="zmdi zmdi-account"></i>Admin List</a>
                                                 </div>
                                                 <div class="account-dropdown__item">
                                                     <a href=" {{route('admin#changePasswordPage')}} ">
