@@ -41,8 +41,6 @@ class AdminController extends Controller
         return back()->with(['notMatch'=>'Password မူရင်း နှင့် တူညီမှု မရှိပါ။ နောက်တစ်ကြိမ် ထပ်မံကြိုးစားကြည့်ပါ!']);
     }
 
-
-        
     //change password page
     public function changePasswordPage(){
         return view('admin.account.changePassword');
@@ -144,7 +142,7 @@ class AdminController extends Controller
             'email' => 'required',
             'gender' => 'required',
             'phone' => 'required',
-            'image' => 'mimes:png,jpg,jpeg|file',
+            'image' => 'mimes:png,jpg,jpeg,webp|file',
             'address' => 'required',
         ], [
             'name.required' => 'name ထည့်ရန်',

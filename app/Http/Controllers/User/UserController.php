@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Category;
@@ -9,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -49,6 +51,60 @@ class UserController extends Controller
     public function accountChangePage() {
         return view('user.profile.account');
     }
+
+    //user account change
+    public function accountChange($id, Request $request) {
+        $this -> accountValidationCheck($request);
+        $data = $this->getUserData($request);
+
+        // for image 
+        if($request->hasFile('image')) {
+            $dbImage = User::where('id', $id)->first();
+            $dbImage = $dbImage->image;
+
+            if($dbImage != null) {
+                Storage::delete('public/'.$dbImage);
+            }
+
+            $fileName = uniqid().$request->file('image')->getClientOriginalName();
+            $request->file('image')->storeAs('public', $fileName);
+            $data['image'] = $fileName;
+        }
+        
+        User::where('id', $id)->update($data);
+        return back()->with(['updateSuccess'=>'User Account Updated..']);
+    }
+
+    // request user data 
+    private function getUserData($request) {
+        return [
+            'name' => $request->name,
+            'email' => $request->email,
+            'gender' => $request->gender,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'updated_at' => Carbon::now()
+        ];
+    }
+
+    //account validation check
+    private function accountValidationCheck($request) {
+        Validator::make($request->all(),[
+            'name' => 'required',
+            'email' => 'required',
+            'gender' => 'required',
+            'phone' => 'required',
+            'image' => 'mimes:png,jpg,jpeg,webp|file',
+            'address' => 'required',
+        ], [
+            'name.required' => 'name ထည့်ရန်',
+            'email.required' => 'email ထည့်ရန်',
+            'gender.required' => 'gender ရွေးရန်',
+            'phone.required' => 'phone နံပါတ် ထည့်ရန်',
+            'address.required' => 'address ထည့်ရန်',
+        ])->validate();
+    }
+    
 
     // password validation check
     private function passwordValidationCheck($request) {

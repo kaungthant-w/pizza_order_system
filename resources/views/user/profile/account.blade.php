@@ -13,8 +13,18 @@
                         </div>
                         
                         <hr>
+                        @if(session('updateSuccess'))
+                            <div class="col-4 offset-8">
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <i class="fa-solid fa-check mr-2"></i> {{ session('updateSuccess') }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </div>
+                        @endif
 
-                        <form action=" {{route('admin#update',Auth::user()->id)}}" method="post" enctype="multipart/form-data">
+                        <form action=" {{route('user#accountChange',Auth::user()->id)}}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class=" col-4 offset-1">

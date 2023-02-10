@@ -79,8 +79,7 @@
     <!-- Navbar End -->
 
     @yield('content')
-
-
+    
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-secondary mt-5 pt-5">
         <div class="row px-xl-5 pt-5">
