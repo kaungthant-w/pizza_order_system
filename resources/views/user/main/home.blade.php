@@ -69,7 +69,7 @@
                                                 <img class="img-fluid w-100" style="height:18rem" src="{{asset('storage/'.$p->image)}}" alt="">
                                                 <div class="product-action">
                                                     <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa-solid fa-circle-info"></i></a>
+                                                    <a class="btn btn-outline-dark btn-square" href=" {{route('user#pizzaDetails', $p->id)}} "><i class="fa-solid fa-circle-info"></i></a>
                                                 </div>
                                             </div>
                                             <div class="text-center py-4">

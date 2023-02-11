@@ -83,6 +83,13 @@ class UserController extends Controller
         return back()->with(['updateSuccess'=>'User Account Updated..']);
     }
 
+    //direct pizza details
+    public function pizzaDetails($pizzaId) {
+        $pizza = Product::where('id', $pizzaId)->first();
+        $pizzaList = Product::get();
+        return view('user.main.details', compact('pizza', 'pizzaList'));
+    }
+
     // request user data 
     private function getUserData($request) {
         return [

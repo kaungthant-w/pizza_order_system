@@ -160,8 +160,8 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script> --}}
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="{{asset('lib/easing/easing.min.js')}}"></script>
-    <script src="{{asset('lib/owlcarousel/owl.carousel.min.js')}}"></script>
+    <script src="{{asset('user/lib/easing/easing.min.js')}}"></script>
+    <script src="{{asset('user/lib/owlcarousel/owl.carousel.min.js')}}"></script>
 
     <!-- Contact Javascript File -->
     <script src="{{asset('user/mail/jqBootstrapValidation.min.js')}}"></script>
