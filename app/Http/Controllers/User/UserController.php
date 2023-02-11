@@ -52,6 +52,14 @@ class UserController extends Controller
         return view('user.profile.account');
     }
 
+    // filer pizza
+    public function filter($categoryId) {
+        // dd($categoryId);
+        $pizza = Product::where('category_id', $categoryId)->orderBy('created_at', 'desc') -> get();
+        $category = Category::get();
+        return view('user.main.home', compact('pizza', 'category'));
+    }
+
     //user account change
     public function accountChange($id, Request $request) {
         $this -> accountValidationCheck($request);

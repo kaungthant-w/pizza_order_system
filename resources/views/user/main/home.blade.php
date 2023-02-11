@@ -16,10 +16,12 @@
                             <span class="badge badge-info font-weight-normal"> {{count($category)}} </span>
                         </div>
                         <hr>
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <a href=" {{route("user#home")}}" class="text-dark"><label class="" for="price-1"> All </label></a>
+                        </div>
                         @foreach ($category as $c )
                             <div class="d-flex align-items-center justify-content-between mb-3">
-                                {{-- <input type="checkbox" class="custom-control-input" id="price-1"> --}}
-                                <label class="" for="price-1"> {{$c->name}} </label>
+                                <a href=" {{route('user#filter', $c->id)}} " class="text-dark"><label class="" for="price-1"> {{$c->name}}</label></a>
                             </div>
                         @endforeach
                     </form>
@@ -58,26 +60,30 @@
                         </div>
                     </div>
                     {{-- <a href="detail.html"> --}}
-                        <div class="row" id="dataList">
-                            @foreach ($pizza as $p)
-                                <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
-                                    <div class="product-item bg-light mb-4" id="myForm">
-                                        <div class="product-img position-relative overflow-hidden">
-                                            <img class="img-fluid w-100" style="height:18rem" src="{{asset('storage/'.$p->image)}}" alt="">
-                                            <div class="product-action">
-                                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa-solid fa-circle-info"></i></a>
+                        <div class="row " id="dataList">
+                            @if (count($pizza) != 0)
+                                @foreach ($pizza as $p)
+                                    <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
+                                        <div class="product-item bg-light mb-4" id="myForm">
+                                            <div class="product-img position-relative overflow-hidden">
+                                                <img class="img-fluid w-100" style="height:18rem" src="{{asset('storage/'.$p->image)}}" alt="">
+                                                <div class="product-action">
+                                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa-solid fa-circle-info"></i></a>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="text-center py-4">
-                                            <a class="h6 text-decoration-none text-truncate" href="">{{$p->name}}</a>
-                                            <div class="d-flex align-items-center justify-content-center mt-2">
-                                                <h5>{{$p->price}} kyats</h5>
+                                            <div class="text-center py-4">
+                                                <a class="h6 text-decoration-none text-truncate" href="">{{$p->name}}</a>
+                                                <div class="d-flex align-items-center justify-content-center mt-2">
+                                                    <h5>{{$p->price}} kyats</h5>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            @endforeach
+                                @endforeach
+                            @else
+                                <p class="text-center h2 shadow-sm m-5">There is no pizza <i class="fa-solid fa-pizza-slice"></i></p>
+                            @endif
                         </div>    
                     {{-- </a> --}}
 
