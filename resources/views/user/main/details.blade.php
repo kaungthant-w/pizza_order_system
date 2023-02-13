@@ -21,6 +21,8 @@
         <div class="col-lg-7 h-auto mb-30 mt-3">
             <div class="h-100 bg-light p-30">
                 <h3>{{$pizza -> name}}</h3>
+                <input type="hidden" value="{{Auth::user()->id}}" id="userId">
+                <input type="hidden" value="{{$pizza->id}}" id="pizzaId">
                 <div class="d-flex mb-3">
                     {{-- <div class="text-primary mr-2">
                         <small class="fas fa-star"></small>
@@ -40,15 +42,15 @@
                                 <i class="fa fa-minus"></i>
                             </button>
                         </div>
-                        <input type="text" class="form-control bg-secondary border-0 text-center" value="1">
+                        <input type="text" class="form-control bg-secondary border-0 text-center" value="1" min="1" id="orderCount">
+                       
                         <div class="input-group-btn">
                             <button class="btn btn-primary btn-plus">
                                 <i class="fa fa-plus"></i>
                             </button>
                         </div>
                     </div>
-                    <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To
-                        Cart</button>
+                    <button type="button" class="btn btn-primary px-3" id="addCartBtn"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
                 </div>
                 <div class="d-flex pt-2">
                     <strong class="text-dark mr-2">Share on:</strong>
@@ -110,5 +112,39 @@
     </div>
 </div>
 <!-- Products End -->  
+@endsection
+
+@section('scriptSource')
+    <script>
+        $(document).ready(function(){
+            $('#addCartBtn').click(function(){
+                $userId = $('#userId').val();
+                $pizzaId = $('#pizzaId').val();
+                $count = $("#orderCount").val();
+                
+                $source = {
+                    'userId' : $userId,
+                    'pizzaId' : $pizzaId,
+                    'count' : $count
+                }
+
+                // console.log($source);
+
+                $.ajax({
+                        type: 'get',
+                        url: 'http://127.0.0.1:8000/user/ajax/addToCart',
+                        data : $source ,
+                        dataType: 'json',
+                        success : function(response) {
+                            console.log(response.status);
+                            if(response.status == 'success') {
+                                window.location.href = "http://127.0.0.1:8000/user/homePage";
+                            }
+                        }
+                    })
+
+            })
+        })
+    </script>
 @endsection
    
