@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -19,7 +20,8 @@ class UserController extends Controller
     public function home() {
         $pizza =Product::orderBy('created_at', 'desc')->get();
         $category = Category::get();
-        return view('user.main.home', compact('pizza', 'category'));
+        $cart = Cart::where('user_id', Auth::user()->id)->get();
+        return view('user.main.home', compact('pizza', 'category', 'cart'));
     }
 
     // change Password Page
@@ -88,6 +90,21 @@ class UserController extends Controller
         $pizza = Product::where('id', $pizzaId)->first();
         $pizzaList = Product::get();
         return view('user.main.details', compact('pizza', 'pizzaList'));
+    }
+
+    // cart list
+    public function cartList() {
+        $cartList = Cart::select('carts.*','products.name as pizza_name', 'products.price as pizza_price')
+                    ->leftJoin('products', 'products.id', 'carts.product_id')
+                    ->where('user_id', Auth::user()->id)
+                    ->get();
+                    // dd($cartList->toArray());
+        $totalPrice = 0;
+        foreach($cartList as $c) {
+            $totalPrice += $c->pizza_price * $c->qty;
+        }            
+                    
+        return view('user.main.cart', compact('cartList', 'totalPrice'));
     }
 
     // request user data 
