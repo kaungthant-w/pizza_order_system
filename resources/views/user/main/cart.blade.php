@@ -102,10 +102,10 @@
 </script> --}}
     <script>
     $(document).ready(function() {
-        $('.fa-plus, .fa-minus').click(function(){
+        $('.btn-plus, .btn-minus').click(function(){
             var $parentNode = $(this).parents('tr');
             var $price = $parentNode.find('#pizzaPrice').val();
-            var $qty = Number($parentNode.find('#qty').val()) + ($(this).hasClass('fa-plus') ? 1 : -1);
+            var $qty = Number($parentNode.find('#qty').val()) + ($(this).hasClass('btn-plus') ? 1 : -1);
 
             var $total = $price * $qty;
             console.log($total)
