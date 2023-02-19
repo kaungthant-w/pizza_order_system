@@ -25,20 +25,20 @@
                                 <td class="align-middle">
                                     <div class="input-group quantity mx-auto" style="width: 100px;">
                                         <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-primary btn-minus" >
+                                            <button class="btn btn-sm btn-primary btn-minus " >
                                             <i class="fa fa-minus"></i>
                                             </button>
                                         </div>
                                         <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="{{$c->qty}}" id="qty">
                                         <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-primary btn-plus">
+                                            <button class="btn btn-sm btn-primary btn-plus ">
                                                 <i class="fa fa-plus"></i>
                                             </button>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="align-middle" id="total">{{$c->pizza_price * $c->qty}} kyats</td>
-                                <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
+                                <td class="align-middle"><button class="btn btn-sm btn-danger btnRemove"><i class="fa fa-times"></i></button></td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -105,12 +105,21 @@
         $('.btn-plus, .btn-minus').click(function(){
             var $parentNode = $(this).parents('tr');
             var $price = $parentNode.find('#pizzaPrice').val();
-            var $qty = Number($parentNode.find('#qty').val()) + ($(this).hasClass('btn-plus') ? 1 : -1);
+            var $qty = Number($parentNode.find('#qty').val());
+
+            console.log($price + "  " + $qty)
 
             var $total = $price * $qty;
             console.log($total)
+
             $parentNode.find('#total').html($total+" kyats");
         });
+
+        $('.btnRemove').click(function(){
+            console.log('remove');
+            $parentNode = $(this).parents("tr");
+            $parentNode.remove();
+        })
     });
 </script>
 @endsection
