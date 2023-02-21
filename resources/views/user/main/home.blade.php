@@ -46,8 +46,8 @@
                                 <button class="btn position-relative bg-dark text-white">
                                     <i class="fa-solid fa-cart-plus"></i>
                                     <span class="position-absolute top-0 start-100 text-white translate-middle badge rounded-pill bg-danger">
-                                        {{-- {{count($cart)}}  --}}
-                                    </span>
+                                        {{count($cart)}} 
+
                                 </button>
                             </a>
                             <div>
