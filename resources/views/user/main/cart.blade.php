@@ -7,6 +7,7 @@
                 <table class="table table-light table-borderless table-hover text-center mb-0" id="dataTable">
                     <thead class="thead-dark">
                         <tr>
+                            <th></th>
                             <th>Products</th>
                             <th>Price</th>
                             <th>Quantity</th>
@@ -19,7 +20,8 @@
                         <tr>
                                 {{-- <input type="hidden" value="{{$c->pizza_price}}" id="pizzaPrice"> --}}
 
-                                <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px;">{{$c->pizza_name}}</td>
+                                <td class="align-middle"><img src="{{asset('storage/'.$c->product_image)}}" alt="" style="width: 50px;" class="img-thumbnail"></td>
+                                <td>{{$c->pizza_name}}</td>
 
                                 <td class="align-middle" id="pizzaPrice">{{$c->pizza_price}}</td>
                                 <td class="align-middle">
