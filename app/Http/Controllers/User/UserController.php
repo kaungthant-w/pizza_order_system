@@ -59,7 +59,10 @@ class UserController extends Controller
         // dd($categoryId);
         $pizza = Product::where('category_id', $categoryId)->orderBy('created_at', 'desc') -> get();
         $category = Category::get();
-        return view('user.main.home', compact('pizza', 'category'));
+        $cart = Cart::where('user_id', Auth::user()->id)->get();
+        // dd($category->toArray());
+        // dd(count($category));
+        return view('user.main.home', compact('pizza', 'category','cart'));
     }
 
     //user account change

@@ -142,7 +142,7 @@
                                 <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
                                     <div class="product-item bg-light mb-4" id="myForm">
                                         <div class="product-img position-relative overflow-hidden">
-                                            <img class="img-fluid w-100" style="height:18rem" src="{{asset('storage/${response[$i].image}')}}" alt="">
+                                            <img class="img-fluid w-100" style="height:22rem" src="{{asset('storage/${response[$i].image}')}}" alt="">
                                             <div class="product-action">
                                                 <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                                                 <a class="btn btn-outline-dark btn-square" href=""><i class="fa-solid fa-circle-info"></i></a>

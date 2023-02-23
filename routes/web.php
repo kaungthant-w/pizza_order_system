@@ -101,6 +101,8 @@ Route::middleware(['auth'])->group(function () {
 
             Route::get('pizza/list', [AjaxController::class, 'pizzaList'])->name('ajax#pizzaList');
             Route::get('addToCart', [AjaxController::class, 'addToCart'])->name('ajax#addToCart');
+            Route::get('order', [AjaxController::class, 'order'])->name('ajax#order');
+            
         });
     });
 

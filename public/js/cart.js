@@ -16,7 +16,7 @@
             $parentNode.find('#total').html(`${$total} kyats`);
 
             $totalPrice = 0;
-            $('#dataTable tr').each(function(index, row){
+            $('#dataTable tbody tr').each(function(index, row){
                 // console.log($(row).find('#total').text().replace('kyats',''));
                 $totalPrice += Number($(row).find('#total').text().replace('kyats',''));
             });
