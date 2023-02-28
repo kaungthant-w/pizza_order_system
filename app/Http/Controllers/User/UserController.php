@@ -9,6 +9,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -21,7 +22,8 @@ class UserController extends Controller
         $pizza =Product::orderBy('created_at', 'desc')->get();
         $category = Category::get();
         $cart = Cart::where('user_id', Auth::user()->id)->get();
-        return view('user.main.home', compact('pizza', 'category', 'cart'));
+        $history = Order::where('user_id', Auth::user()->id)->get();
+        return view('user.main.home', compact('pizza', 'category', 'cart', 'history'));
     }
 
     // change Password Page
@@ -120,6 +122,12 @@ class UserController extends Controller
             'address' => $request->address,
             'updated_at' => Carbon::now()
         ];
+    }
+
+    // direct history page
+    public function history() {
+        $order = Order::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->paginate('6');
+        return view("user.main.history",compact("order"));
     }
 
     //account validation check

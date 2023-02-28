@@ -70,7 +70,6 @@ class AjaxController extends Controller
             'total_price' => $total+3000
         ]);
 
-
         return response()->json([
             'status' => 'true',
             'message' => 'order Completed'
@@ -85,5 +84,19 @@ class AjaxController extends Controller
             'product_id' => $request->pizzaId,
             'qty' => $request->count,
         ];
+    }
+
+    // clear cart
+    public function clearCart() {
+        Cart::where('user_id', Auth::user()->id)->delete();
+    }
+
+    //clear current product
+    public function clearCurrentProduct (Request $request) {
+        // logger($request->all());
+        Cart::where('user_id', Auth::user()->id)
+            ->where('product_id', $request->productId)
+            ->where('id', $request->orderId)
+            ->delete();
     }
 }

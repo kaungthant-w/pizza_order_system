@@ -57,21 +57,23 @@
                                 <th>Gender</th>
                                 <th>Phone</th>
                                 <th>Address</th>
+                                <th>Status</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($admin as $a)
                             <tr class="tr-shadow">
+                                <input type="hidden" class="roleId" value="{{$a->id}}">
                                 <td> 
                                     @if($a->image == null)
                                         @if ($a->gender == 'male')
-                                            <img src="{{asset('img/default_user.png')}}" alt="" class=" img-thumbnail">
+                                            <img src="{{asset('img/default_user.png')}}" alt="" class=" img-thumbnail" style="width:150px">
                                         @else
-                                        <img src="{{asset('img/female_default.png')}}" alt="" class=" img-thumbnail">    
+                                        <img src="{{asset('img/female_default.png')}}" alt="" class=" img-thumbnail" style="width:150px">    
                                         @endif 
                                     @else
-                                        <img src="{{asset('storage/'.$a->image)}}" alt="" class="img-thumbnail"> 
+                                        <img src="{{asset('storage/'.$a->image)}}" alt="" class="img-thumbnail" style="width:150px"> 
                                     @endif
                                 </td>    
                                 <td>{{$a->name}}</td>
@@ -79,6 +81,17 @@
                                 <td>{{$a->phone}}</td>
                                 <td>{{$a->gender}}</td>
                                 <td>{{$a->address}}</td>
+                                <td>
+                                    @if (Auth::user()->id == $a->id)
+                                    
+                                    @else
+                                        <select name="status" class="form-control roleChange" id="roleChange">
+                                            <option value="admin" @if ($a->role == 'admin') selected @endif>Admin</option>
+                                            <option value="user" @if ($a->role == 'user') selected @endif>User</option>
+                                        </select>    
+                                    @endif
+                                        
+                                </td>
                                 <td>
                                     <div class="table-data-feature">
                                         {{-- <a href="@if(Auth::user()->id == $a->id) # @else {{ route('admin#delete') }} @endif">
@@ -115,4 +128,36 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scriptSection')
+    <script>
+        $(document).ready(function(){
+                //change role
+                $('.roleChange').change(function() {
+                $currentRole = $(this).val();
+                console.log($currentRole);
+
+                $parentNode = $(this).parents('tr');
+                console.log($parentNode)
+                $roleId = $parentNode.find('.roleId').val();
+
+                $data = {
+                    'role' : $currentRole,
+                    'roleId' : $roleId,
+                }
+
+                console.log($data);
+
+                $.ajax({
+                    type : 'get',
+                    url : 'http://127.0.0.1:8000/admin/ajax/change/role',
+                    data : $data,
+                    dataType : 'json',
+                })
+                // location.reload();
+                window.location.href = "http://127.0.0.1:8000/admin/list";
+            })
+        });
+    </script>
 @endsection

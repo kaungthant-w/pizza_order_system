@@ -58,6 +58,10 @@
                             <a href="{{route('product#list')}}">
                                 <i class="fas fa-pizza-slice"></i>Products</a>
                         </li>
+                        <li>
+                            <a href="{{route('admin#orderList')}}">
+                                <i class="fas fa-list-check"></i>Order List</a>
+                        </li>
                     </ul>
                 </nav>
             </div>
@@ -221,5 +225,6 @@
 
 </body>
 
+@yield('scriptSection')
 </html>
 <!-- end document-->

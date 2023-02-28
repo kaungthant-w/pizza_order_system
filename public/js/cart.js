@@ -25,9 +25,5 @@
             $('#finalPrice').html(`${$totalPrice+3000} kyats`);
         });
 
-        $('.btnRemove').click(function(){
-            // console.log('remove');
-            $parentNode = $(this).parents("tr");
-            $parentNode.remove();
-        })
+        
     });
