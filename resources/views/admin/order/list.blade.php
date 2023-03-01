@@ -75,7 +75,9 @@
                                         <td >{{$o->user_id}}</td>
                                         <td >{{$o->user_name}}</td>
                                         <td >{{$o->created_at->format('F-j-Y')}}</td>
-                                        <td >{{$o->order_code}}</td>
+                                        <td >
+                                            <a href="{{route('admin#listInfo', $o->order_code)}}" class="text-primary">{{$o->order_code}}</a>
+                                        </td>
                                         <td >{{$o->total_price}} Kyats</td>
                                         <td>
                                             <select name="status" class="form-control statusChange" id="statusChange">
