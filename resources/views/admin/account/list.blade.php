@@ -136,10 +136,10 @@
                 //change role
                 $('.roleChange').change(function() {
                 $currentRole = $(this).val();
-                console.log($currentRole);
+                // console.log($currentRole);
 
                 $parentNode = $(this).parents('tr');
-                console.log($parentNode)
+                // console.log($parentNode)
                 $roleId = $parentNode.find('.roleId').val();
 
                 $data = {
@@ -147,7 +147,7 @@
                     'roleId' : $roleId,
                 }
 
-                console.log($data);
+                // console.log($data);
 
                 $.ajax({
                     type : 'get',

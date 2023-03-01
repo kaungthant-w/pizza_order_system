@@ -21,21 +21,22 @@ class OrderController extends Controller
     }
 
     //sort with ajax
-    public function ajaxStatus(Request $request) {
+    public function changeStatus(Request $request) {
         // logger($request->all());
+        // dd($request->all());
 
         $order = Order::select('orders.*', 'users.name as user_name')
                 ->leftJoin('users', 'users.id', 'orders.user_id')
                 ->orderBy('created_at','desc');
 
-                if($request -> status == null) {
+                if($request -> orderStatus == null) {
                     $order = $order -> paginate(5);
 
                 } else {
-                    $order = $order->where('orders.status', $request->status)-> paginate(5);
+                    $order = $order->where('orders.status', $request->orderStatus)-> paginate(5);
                 }
 
-                return response()->json($order, 200);        
+                return view('admin.order.list', compact('order'));        
     }
 
     // ajax change status
@@ -45,10 +46,10 @@ class OrderController extends Controller
             'status' => $request -> status
         ]);
 
-        // $order = Order::select('orders.*', 'users.name as user_name')
-        //         ->leftJoin('users', 'users.id', 'orders.user_id')
-        //         ->orderBy('created_at', 'desc')
-        //         ->get();
-        // return response()->json($order, 200);        
+        $order = Order::select('orders.*', 'users.name as user_name')
+                ->leftJoin('users', 'users.id', 'orders.user_id')
+                ->orderBy('created_at', 'desc')
+                ->get();
+        return response()->json($order, 200);        
     }
 }

@@ -38,15 +38,22 @@
                     </form>
                 </div>
 
-                <div class="d-flex mt-3">
-                    <label for="" class="mt-2 mr-4">Order Status</label>
-                    <select name="status" id="" class="form-control col-2 orderStatus" id="orderStatus">
-                        <option value="">All</option>
-                        <option value="0">Pending</option>
-                        <option value="1">Accept</option>
-                        <option value="2">Reject</option>
-                    </select>
-                </div>
+
+                <form action="{{route('admin#changeStatus')}}" method="get">
+                    @csrf
+                    <div class="input-group mb-3 col-6">
+                        <label for="" class="mt-2 mr-2" for="orderLabel">Order Status</label>
+                        <select name="orderStatus" id="orderLabel" class="custom-select col-3 orderStatus" id="orderStatus">
+                            <option value="">All</option>
+                            <option value="0" @if(request('orderStatus') == '0') selected @endif>Pending</option>
+                            <option value="1" @if(request('orderStatus') == '1') selected @endif>Accept</option>
+                            <option value="2" @if(request('orderStatus') == '2') selected @endif>Reject</option>
+                        </select>
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-dark input-group-text">Search</button>
+                        </div>
+                    </div>
+                </form>
                 
                     {{-- @if (count($pizzas) != 0) --}}
                         <div class="table-responsive table-responsive-data2 mt-5">
@@ -99,89 +106,89 @@
     <script>
         
         $(document).ready(function(){
-            $('.orderStatus').change(function(){
-                // console.log('hello')
-                $status = $('.orderStatus').val();
-                // console.log($status);
+            // $('.orderStatus').change(function(){
+            //     // console.log('hello')
+            //     $status = $('.orderStatus').val();
+            //     // console.log($status);
 
-                $.ajax({
-                    type : 'get', 
-                    url : 'http://127.0.0.1:8000/order/ajax/status',
-                    data :  {
-                        'status' : $status,
-                    },
-                    dataType : 'json',
-                    success : function (response) {
-                        // console.log(response.data[0].created_at);
-                        // console.log(response.data[0].user_name);
-                        // console.log(response.data.length);
-                        $list = '';
-                            for($i=0; $i < response.data.length; $i++) {
+            //     $.ajax({
+            //         type : 'get', 
+            //         url : 'http://127.0.0.1:8000/order/ajax/status',
+            //         data :  {
+            //             'status' : $status,
+            //         },
+            //         dataType : 'json',
+            //         success : function (response) {
+            //             // console.log(response.data[0].created_at);
+            //             // console.log(response.data[0].user_name);
+            //             // console.log(response.data.length);
+            //             $list = '';
+            //                 for($i=0; $i < response.data.length; $i++) {
 
-                                // February-28-2023
-                                // console.log(response.data[$i].created_at);
-                                $months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September'];
-                                $dbDate = new Date(response.data[$i].created_at);
-                                // console.log($dbDate);
-                                // console.log($dbDate.getMonth());
-                                // console.log($dbDate.getDate());
-                                // console.log($dbDate.getFullYear());
-                                // console.log($months[$dbDate.getMonth()]);
-                                // console.log($months[$dbDate.getMonth()]+"-"+$dbDate.getDate()+"-"+$dbDate.getFullYear());
+            //                     // February-28-2023
+            //                     // console.log(response.data[$i].created_at);
+            //                     $months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September'];
+            //                     $dbDate = new Date(response.data[$i].created_at);
+            //                     // console.log($dbDate);
+            //                     // console.log($dbDate.getMonth());
+            //                     // console.log($dbDate.getDate());
+            //                     // console.log($dbDate.getFullYear());
+            //                     // console.log($months[$dbDate.getMonth()]);
+            //                     // console.log($months[$dbDate.getMonth()]+"-"+$dbDate.getDate()+"-"+$dbDate.getFullYear());
 
-                                $finalDate = $months[$dbDate.getMonth()]+"-"+$dbDate.getDate()+"-"+$dbDate.getFullYear();
+            //                     $finalDate = $months[$dbDate.getMonth()]+"-"+$dbDate.getDate()+"-"+$dbDate.getFullYear();
 
-                                if(response.data[$i].status == 0) {
-                                    $statusMessage = `
-                                        <select name="status" class="form-control statusChange" id="statusChange">
-                                            <option value="0" selected>Pending</option>
-                                            <option value="1">Accept</option>
-                                            <option value="2">Reject</option>
-                                        </select>
+            //                     if(response.data[$i].status == 0) {
+            //                         $statusMessage = `
+            //                             <select name="status" class="form-control statusChange" id="statusChange">
+            //                                 <option value="0" selected>Pending</option>
+            //                                 <option value="1">Accept</option>
+            //                                 <option value="2">Reject</option>
+            //                             </select>
                                     
-                                    `;
+            //                         `;
 
-                                } else if(response.data[$i].status == 1) {
-                                    $statusMessage = `
-                                        <select name="status" class="form-control statusChange" id="statusChange">
-                                            <option value="0">Pending</option>
-                                            <option value="1" selected>Accept</option>
-                                            <option value="2">Reject</option>
-                                        </select>
+            //                     } else if(response.data[$i].status == 1) {
+            //                         $statusMessage = `
+            //                             <select name="status" class="form-control statusChange" id="statusChange">
+            //                                 <option value="0">Pending</option>
+            //                                 <option value="1" selected>Accept</option>
+            //                                 <option value="2">Reject</option>
+            //                             </select>
                                     
-                                    `;
+            //                         `;
 
-                                } else if(response.data[$i].status == 2) {
-                                    $statusMessage = `
-                                        <select name="status" class="form-control statusChange" id="statusChange">
-                                            <option value="0">Pending</option>
-                                            <option value="1">Accept</option>
-                                            <option value="2" selected>Reject</option>
-                                        </select>
+            //                     } else if(response.data[$i].status == 2) {
+            //                         $statusMessage = `
+            //                             <select name="status" class="form-control statusChange" id="statusChange">
+            //                                 <option value="0">Pending</option>
+            //                                 <option value="1">Accept</option>
+            //                                 <option value="2" selected>Reject</option>
+            //                             </select>
                                     
-                                    `;
-                                }
+            //                         `;
+            //                     }
                                 
-                                // console.log($statusMessage);
+            //                     // console.log($statusMessage);
 
-                                $list += `
-                                    <tr class ="tr-shadow">
-                                        <input type="hidden" class="orderId" value="${response.data[$i].id}">
-                                        <td>${response.data[$i].user_id} </td>
-                                        <td>${response.data[$i].user_name} || ${response.data[$i].id}  </td>
-                                        <td>${$finalDate} </td>
-                                        <td>${response.data[$i].order_code}</td>
-                                        <td>${response.data[$i].total_price} kyats</td>
-                                        <td>${$statusMessage}</td>
-                                    </tr>
-                                `;
-                                }
+            //                     $list += `
+            //                         <tr class ="tr-shadow">
+            //                             <input type="hidden" class="orderId" value="${response.data[$i].id}">
+            //                             <td>${response.data[$i].user_id} </td>
+            //                             <td>${response.data[$i].user_name} || ${response.data[$i].id}  </td>
+            //                             <td>${$finalDate} </td>
+            //                             <td>${response.data[$i].order_code}</td>
+            //                             <td>${response.data[$i].total_price} kyats</td>
+            //                             <td>${$statusMessage}</td>
+            //                         </tr>
+            //                     `;
+            //                     }
 
-                            $("#dataList").html($list);
-                            // console.log($list);
-                    }
-                })
-            })
+            //                 $("#dataList").html($list);
+            //                 // console.log($list);
+            //         }
+            //     })
+            // })
 
             //change status
             $('.statusChange').change(function() {
@@ -190,20 +197,21 @@
                 // $qty = Number($parentNode.find('#qty').val());
                 // $total = $price * $qty;
                 // $parentNode.find('#total').html(`${$total} kyats`);
+                // console.log('hello testing');
 
                 $currentStatus = $(this).val();
                 $parentNode = $(this).parents('tr');
-                console.log($parentNode)
+                // console.log($parentNode)
                 $orderId = $parentNode.find('.orderId').val();
 
-                console.log($orderId);
+                // console.log($orderId);
 
                 $data = {
                     'status' : $currentStatus,
                     'orderId' : $orderId
                 }
 
-                // console.log($data);
+                console.log($data);
 
                 $.ajax({
                     type : 'get',
