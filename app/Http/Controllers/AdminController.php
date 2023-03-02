@@ -91,7 +91,7 @@ class AdminController extends Controller
                       ->orWhere('address', 'like', '%'.request('key').'%');
                 })
                 ->where('role', 'admin')
-                ->paginate(3);
+                ->paginate(5);
         $admin->appends(request()->all());
         return view('admin.account.list', compact('admin'));
     }

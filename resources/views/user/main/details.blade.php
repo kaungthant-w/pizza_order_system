@@ -24,14 +24,7 @@
                 <input type="hidden" value="{{Auth::user()->id}}" id="userId">
                 <input type="hidden" value="{{$pizza->id}}" id="pizzaId">
                 <div class="d-flex mb-3">
-                    {{-- <div class="text-primary mr-2">
-                        <small class="fas fa-star"></small>
-                        <small class="fas fa-star"></small>
-                        <small class="fas fa-star"></small>
-                        <small class="fas fa-star-half-alt"></small>
-                        <small class="far fa-star"></small>
-                    </div> --}}
-                    <small class="pt-1">{{$pizza->view_count}} <i class="fa-solid fa-eye"></i></small>
+                    <small class="pt-1"><i class="fa-solid fa-eye"></i> {{$pizza->view_count + 1}} </small>
                 </div>
                 <h3 class="font-weight-semi-bold mb-4">{{$pizza->price}} kyats</h3>
                 <p class="mb-4">{{$pizza->description}}</p>
@@ -117,6 +110,15 @@
 @section('scriptSource')
     <script>
         $(document).ready(function(){
+
+            // console.log($('#pizzaId').val());
+            $.ajax({
+                type:'get',
+                url:'http://127.0.0.1:8000/user/ajax/increase/viewCount',
+                data:{'productId':$('#pizzaId').val()},
+                dataType:'json',
+            });
+
             $('#addCartBtn').click(function(){
                 $userId = $('#userId').val();
                 $pizzaId = $('#pizzaId').val();

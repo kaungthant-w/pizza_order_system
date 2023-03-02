@@ -26,6 +26,24 @@ class UserController extends Controller
         return view('user.main.home', compact('pizza', 'category', 'cart', 'history'));
     }
 
+
+    //direct user list page
+    public function userList() {
+        $users = User::where('role','user')->paginate();
+        return view('admin.user.list', compact('users'));
+    }
+
+    //change user role
+    public function userChangeRole(Request $request) {
+        // logger($request->all());
+        $updateSource = [
+            'role' => $request->role
+        ];
+
+        User::where('id', $request->userId)->update($updateSource);
+    }
+
+
     // change Password Page
     public function changePasswordPage() {
         return view('user.password.change');
@@ -62,9 +80,10 @@ class UserController extends Controller
         $pizza = Product::where('category_id', $categoryId)->orderBy('created_at', 'desc') -> get();
         $category = Category::get();
         $cart = Cart::where('user_id', Auth::user()->id)->get();
+        $history = Order::where('user_id', Auth::user()->id)->get();
         // dd($category->toArray());
         // dd(count($category));
-        return view('user.main.home', compact('pizza', 'category','cart'));
+        return view('user.main.home', compact('pizza', 'category','cart','history'));
     }
 
     //user account change
@@ -112,6 +131,50 @@ class UserController extends Controller
         return view('user.main.cart', compact('cartList', 'totalPrice'));
     }
 
+
+    // direct history page
+    public function history() {
+        $order = Order::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->paginate('6');
+        return view("user.main.history",compact("order"));
+    }
+
+    //user edit page
+    public function edit($id) {
+        $user = User::where('id', $id)->first();
+        return view('admin.user.edit', compact('user'));
+    }
+
+
+    //update user
+    public function update($id, Request $request) {
+
+        $this -> accountValidationCheck($request);
+        $data = $this->getUserData($request);
+
+        // dd($data);
+
+        User::where('id', $id) -> update($data);
+        return redirect()->route('admin#userList')->with(['updateSuccess'=>'User Account Updated..']);
+    }
+
+        //admin delete
+        public function delete($id) {
+            User::where('id', $id)->delete();
+            return back()->with(['deleteSuccess'=>'Account Deleted...']);
+        }
+
+    //request user info
+    // private function requestUserInfo($request) {
+    //     return [
+    //         'name' => $request->name,
+    //         'email' => $request->email,
+    //         'image' => $request->userImage,
+    //         'phone' => $request->phone,
+    //         'gender' => $request->gender,
+    //         'address' => $request->address,
+    //     ];
+    // }
+
     // request user data 
     private function getUserData($request) {
         return [
@@ -122,12 +185,6 @@ class UserController extends Controller
             'address' => $request->address,
             'updated_at' => Carbon::now()
         ];
-    }
-
-    // direct history page
-    public function history() {
-        $order = Order::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->paginate('6');
-        return view("user.main.history",compact("order"));
     }
 
     //account validation check

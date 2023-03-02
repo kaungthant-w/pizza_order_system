@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\User\AjaxController;
@@ -60,6 +61,8 @@ Route::middleware(['auth'])->group(function () {
         
     });
 
+    //products
+
     Route::prefix('products')->group(function() {
         Route::get('list', [ProductController::class, 'list'])->name('product#list');
         Route::get('create', [ProductController::class, 'createPage'])->name('product#createPage');
@@ -70,7 +73,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('update', [ProductController::class, 'update'])->name('product#update');
     });
 
-    // products
+    // orders
     Route::prefix('order')->group(function(){
         Route::get('list', [OrderController::class, 'orderList'])->name("admin#orderList");
         // Route::get('ajax/status', [OrderController::class, 'ajaxStatus'])->name('admin#ajaxStatus');
@@ -78,15 +81,36 @@ Route::middleware(['auth'])->group(function () {
         Route::get('ajax/change/status', [OrderController::class, 'ajaxChangeStatus'])->name('admin#ajaxChangeStatus');
         Route::get('listInfo/{orderCode}', [OrderController::class, 'listInfo'])->name('admin#listInfo');
     });
+
+    //contact
+    Route::prefix('contact')->group(function() {
+        Route::get('list', [ContactController::class, 'contactList'])->name("admin#contactList");
+    });
+
+    // user
+    Route::prefix('user')->group(function(){
+        Route::get('list', [UserController::class, 'userList'])->name("admin#userList");
+        Route::get('change/role',[UserController::class, 'userChangeRole'])->name('admin#userChangeRole');
+        Route::get('edit/{id}', [UserController::class, 'edit'])->name("user#edit");
+        Route::post('update/{id}', [UserController::class, 'update'])->name('user#update');
+        Route::get('delete/{id}', [UserController::class, 'delete'])->name('user#delete');
+    });
    
 });
 
     // user
     // home
     Route::group(['prefix' => 'user', 'middle'=>'user_auth'], function() {
+
         Route::get('homePage', [UserController::class, 'home'])->name('user#home');
         Route::get('filter/{id}', [UserController::class, 'filter'])->name("user#filter");
         Route::get('/history', [UserController::class, 'history'])->name('user#history');
+        
+
+        Route::prefix('contact')->group(function() {
+            Route::get('contactPage', [ContactController::class, 'contactPage'])->name("user#contactPage");
+            Route::post('createContact', [ContactController::class, 'createContact'])->name("user#createContact");
+        });
 
         Route::prefix('pizza')->group(function() {
             Route::get('details/{id}', [UserController::class, 'pizzaDetails'])->name('user#pizzaDetails');
@@ -116,6 +140,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('order', [AjaxController::class, 'order'])->name('ajax#order');
             Route::get('clear/cart', [AjaxController::class, 'clearCart'])->name("ajax#clearCart");
             Route::get('clear/current/product', [AjaxController::class, 'clearCurrentProduct'])->name('ajax#clearCurrentProduct');
+            Route::get('increase/viewCount', [AjaxController::class, 'increaseViewCount'])->name('ajax#increaseViewCount');
         });
     });
 

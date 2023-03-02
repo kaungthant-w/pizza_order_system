@@ -64,9 +64,3 @@
     </div>
 </div>
 @endsection
-
-@section('scriptSection')
-    <script>
-
-    </script>
-@endsection

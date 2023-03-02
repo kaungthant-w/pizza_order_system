@@ -68,9 +68,6 @@
                                     <td>{{$category->created_at->format('j-F-Y')}}</td>
                                     <td>
                                         <div class="table-data-feature">
-                                            {{-- <button class="item" data-toggle="tooltip" data-placement="top" title="Send">
-                                                <i class="fa-solid fa-eye"></i>
-                                            </button> --}}
                                             <a href=" {{route('category#edit', $category->id)}} ">
                                                 <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                                     <i class="fa-solid fa-pen-to-square"></i>
@@ -95,7 +92,6 @@
             </div>
             <div class="mt-3">
                 {{ $categories->links() }}
-                {{-- {{$categories -> appends(request()->query())->links()}}; --}}
             </div>
         </div>
     </div>
