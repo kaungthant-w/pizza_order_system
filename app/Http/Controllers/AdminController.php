@@ -17,12 +17,6 @@ class AdminController extends Controller
 
     //change password
     public function changePassword(Request $request) {
-        // dd($request->all());
-        // 1. all field must be fill 
-        // 2. new password & confirm password length must be greater than 6
-        // 3. new password & confirm password must same 
-        // 4. client old password must be same with db password
-
         $this->passwordValidationCheck($request);
         $user = User::select('password')->where('id', Auth::user()->id)->first();
         $dbHashValue = $user->password; // hash value
@@ -31,9 +25,6 @@ class AdminController extends Controller
                 'password' => Hash::make($request->newPassword)
             ];
             User::where('id', Auth::user()->id)->update($data);
-            
-            // Auth::logout();
-            // return redirect()->route('category#list');
             return back()->with(['changeSuccess'=>'password ပြောင်းလဲခြင်း အောင်မြင်ပါပြီ...']);
 
         }
@@ -58,7 +49,6 @@ class AdminController extends Controller
 
     //update account
     public function update($id,Request $request) {
-        // dd($id, $request-> all());
         $this -> accountValidationCheck($request);
         $data = $this->getUserData($request);
 

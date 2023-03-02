@@ -7,9 +7,6 @@
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
 
-    <!-- Favicon -->
-    {{-- <link href="img/favicon.ico" rel="icon"> --}}
-
         <!-- Title Page-->
         <title> @yield('title') </title>
 
@@ -18,7 +15,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">  
 
     <!-- Font Awesome -->
-    {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet"> --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
@@ -35,9 +31,6 @@
     <!-- Navbar Start -->
     <div class="container-fluid bg-dark mb-30">
         <div class="row px-xl-5">
-            {{-- <div class="col-lg-3 d-none d-lg-block">
-                <span class="h3 text-uppercase text-dark bg-primary px-2 ml-n1">My Shop</span>
-            </div>     --}}
             <div class="col-lg-11">
                 <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
                     <a href="" class="text-decoration-none d-block d-lg-none">
@@ -51,8 +44,6 @@
                         <div class="navbar-nav mr-auto py-0">
                             <a href="{{route('user#home')}}" class="nav-item nav-link active">Home</a>
                             <a href="{{route('user#contactPage')}}" class="nav-item nav-link">Contact</a>
-                            {{-- <a href="cart.html" class="nav-item nav-link">My Cart</a>
-                            <a href="contact.html" class="nav-item nav-link">Contact</a> --}}
                         </div>
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                             <div class="dropdown d-inline">
@@ -145,9 +136,6 @@
                     <a class="text-primary" href="https://htmlcodex.com">HTML Codex</a>
                 </p>
             </div>
-            {{-- <div class="col-md-6 px-xl-0 text-center text-md-right">
-                <img class="img-fluid" src="img/payments.png" alt="">
-            </div> --}}
         </div>
     </div>
     <!-- Footer End -->
@@ -158,7 +146,6 @@
 
 
     <!-- JavaScript Libraries -->
-    {{-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="{{asset('user/lib/easing/easing.min.js')}}"></script>

@@ -21,7 +21,6 @@
                             @csrf
                             <div class="row">
                                 <div class=" col-4 offset-1">
-                                    {{-- <input type="hidden" name="userId" value="{{$user->id}}"> --}}
                                     @if($user->image == null)
                                         @if ($user->gender == 'male')
                                             <img src="{{asset('img/default_user.png')}}" alt="" class="img-thumbnail">

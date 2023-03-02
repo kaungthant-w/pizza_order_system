@@ -36,7 +36,6 @@
             </div>
             <!-- Shop Sidebar End -->
 
-
             <!-- Shop Product Start -->
             <div class="col-lg-9 col-md-8">
                 <div class="row pb-3">
@@ -77,7 +76,6 @@
                             </div>
                         </div>
                     </div>
-                    {{-- <a href="detail.html"> --}}
                         <div class="row " id="dataList">
                             @if (count($pizza) != 0)
                                 @foreach ($pizza as $p)
@@ -103,7 +101,6 @@
                                 <p class="text-center h2 shadow-sm m-5">There is no pizza <i class="fa-solid fa-pizza-slice"></i></p>
                             @endif
                         </div>    
-                    {{-- </a> --}}
 
                 </div>
             </div>
@@ -116,28 +113,12 @@
 @section("scriptSource")
     <script>
         $(document).ready(function(){
-            // alert("hello jquery");
-            // $.ajax({
-            //     type: 'get',
-            //     url: 'http://127.0.0.1:8000/user/ajax/pizza/list',
-            //     dataType: 'json',
-            //     success : function(response) {
-            //         console.log(response);
-            //     }
-            // })
-
-            // $sortingOption = $('#sortingOption').val();
-            // console.log($sortingOption);
-
             $('#sortingOption').change(function(){
-                // console.log('this is changing');
                 $eventOption = $("#sortingOption").val();
-                // console.log($eventOption);
-
                 if($eventOption == "asc") {
                     $.ajax({
                         type: 'get',
-                        url: 'http://127.0.0.1:8000/user/ajax/pizza/list',
+                        url: '/user/ajax/pizza/list',
                         data : {
                             'status':'asc',
                             'message':'This is testing message',
@@ -147,7 +128,6 @@
 
                             $list = '';
                             for($i=0; $i < response.length; $i++) {
-                                // console.log(response[i].name);
                                 $list += `
                                 <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
                                     <div class="product-item bg-light mb-4" id="myForm">
@@ -168,27 +148,21 @@
                                 </div>
                                 `;
                             }
-                            // console.log(response);
-                            // console.log(response[0].name);
-                            // console.log($list);
 
                             $("#dataList").html($list);
 
                         }
                     })
                 } else if($eventOption == 'desc') {
-                    // console.log('last in first out');
                     $.ajax({
                         type: 'get',
-                        url: 'http://127.0.0.1:8000/user/ajax/pizza/list',
+                        url: '/user/ajax/pizza/list',
                         data : {'status':'desc'},
                         dataType: 'json',
                         success : function(response) {
-                            // console.log(response);
 
                             $list = '';
                             for($i=0; $i < response.length; $i++) {
-                                // console.log(response[i].name);
                                 $list += `
                                 <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
                                     <div class="product-item bg-light mb-4" id="myForm">

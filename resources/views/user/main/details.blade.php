@@ -111,7 +111,6 @@
     <script>
         $(document).ready(function(){
 
-            // console.log($('#pizzaId').val());
             $.ajax({
                 type:'get',
                 url:'http://127.0.0.1:8000/user/ajax/increase/viewCount',
@@ -129,8 +128,6 @@
                     'pizzaId' : $pizzaId,
                     'count' : $count
                 }
-
-                // console.log($source);
 
                 $.ajax({
                         type: 'get',

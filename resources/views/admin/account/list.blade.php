@@ -84,11 +84,6 @@
                                 </td>
                                 <td>
                                     <div class="table-data-feature">
-                                        {{-- <a href="@if(Auth::user()->id == $a->id) # @else {{ route('admin#delete') }} @endif">
-                                            <button class="item" data-toggle="tooltip" data-placement="top" title="delete">
-                                                <i class="fa-solid fa-trash-can"></i>
-                                            </button>
-                                        </a> --}}
                                         @if(Auth::user()->id == $a->id)
                                         
                                         @else
@@ -113,7 +108,6 @@
             </div>
             <div class="mt-3">
                 {{ $admin->links() }}
-                {{-- {{$admin -> appends(request()->query())->links()}}; --}}
             </div>
         </div>
     </div>
@@ -126,10 +120,7 @@
                 //change role
                 $('.roleChange').change(function() {
                 $currentRole = $(this).val();
-                // console.log($currentRole);
-
                 $parentNode = $(this).parents('tr');
-                // console.log($parentNode)
                 $roleId = $parentNode.find('.roleId').val();
 
                 $data = {
@@ -137,15 +128,12 @@
                     'roleId' : $roleId,
                 }
 
-                // console.log($data);
-
                 $.ajax({
                     type : 'get',
                     url : 'http://127.0.0.1:8000/admin/ajax/change/role',
                     data : $data,
                     dataType : 'json',
                 })
-                // location.reload();
                 window.location.href = "http://127.0.0.1:8000/admin/list";
             })
         });

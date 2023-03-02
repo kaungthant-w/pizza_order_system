@@ -15,22 +15,17 @@ class AjaxController extends Controller
 {
     // return pizza list
     public function pizzaList(Request $request) {
-        logger($request->all());
-        // logger($request->status);
-
         if($request->status == 'desc') {
             $pizza = Product::orderBy('created_at', 'desc')->get();
         } else {
             $pizza = Product::orderBy('created_at', 'asc')->get();
         }
-        // $data = Product::get();
         return response()->json($pizza, 200);
     }
 
     // return add to cart
     public function addToCart(Request $request){
         $data = $this->getOrderData($request);
-        // logger($data);
 
         Cart::create($data);
         $response = [
@@ -43,10 +38,8 @@ class AjaxController extends Controller
 
     //order
     public function order(Request $request) {
-        // logger($request->all());
         $total = 0;
         foreach($request->all() as $item) {
-            // OrderList::create($item);
             $data = OrderList::create([
                 'user_id' => $item['user_id'],
                 'product_id' => $item['product_id'],
@@ -60,10 +53,6 @@ class AjaxController extends Controller
 
         Cart::where('user_id', Auth::user()->id)->delete();
         
-        // logger($data -> order_code);
-        // logger('success');
-        logger($total+3000);
-
         Order::create([
             'user_id' => Auth::user()->id, 
             'order_code' => $data -> order_code,
@@ -93,7 +82,6 @@ class AjaxController extends Controller
 
     //clear current product
     public function clearCurrentProduct (Request $request) {
-        // logger($request->all());
         Cart::where('user_id', Auth::user()->id)
             ->where('product_id', $request->productId)
             ->where('id', $request->orderId)
@@ -102,7 +90,6 @@ class AjaxController extends Controller
 
     //increase pizza viewCount
     public function increaseViewCount(Request $request) {
-        // logger($request->all());
         $pizza = Product::where('id', $request->productId)->first();
 
         $viewCount = [

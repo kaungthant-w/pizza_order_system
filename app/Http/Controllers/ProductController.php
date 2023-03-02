@@ -18,7 +18,6 @@ class ProductController extends Controller
         })
         ->leftJoin('categories', 'products.category_id', 'categories.id')
         -> orderBy('products.created_at', 'desc')->paginate(3);
-        // dd($pizzas->toArray());
         $pizzas -> appends(request()->all());
         return view('admin.products.pizzaList', compact('pizzas'));
     }

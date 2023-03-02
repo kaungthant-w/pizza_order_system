@@ -35,7 +35,6 @@ class UserController extends Controller
 
     //change user role
     public function userChangeRole(Request $request) {
-        // logger($request->all());
         $updateSource = [
             'role' => $request->role
         ];
@@ -61,7 +60,6 @@ class UserController extends Controller
             ];
             User::where('id', Auth::user()->id)->update($data);
             
-            // Auth::logout();
             return back()->with(['changeSuccess'=>'password ပြောင်းလဲခြင်း အောင်မြင်ပါပြီ...']);
 
         }
@@ -76,13 +74,10 @@ class UserController extends Controller
 
     // filer pizza
     public function filter($categoryId) {
-        // dd($categoryId);
         $pizza = Product::where('category_id', $categoryId)->orderBy('created_at', 'desc') -> get();
         $category = Category::get();
         $cart = Cart::where('user_id', Auth::user()->id)->get();
         $history = Order::where('user_id', Auth::user()->id)->get();
-        // dd($category->toArray());
-        // dd(count($category));
         return view('user.main.home', compact('pizza', 'category','cart','history'));
     }
 
@@ -122,7 +117,6 @@ class UserController extends Controller
                     ->leftJoin('products', 'products.id', 'carts.product_id')
                     ->where('user_id', Auth::user()->id)
                     ->get();
-                    // dd($cartList->toArray());
         $totalPrice = 0;
         foreach($cartList as $c) {
             $totalPrice += $c->pizza_price * $c->qty;
@@ -162,18 +156,6 @@ class UserController extends Controller
             User::where('id', $id)->delete();
             return back()->with(['deleteSuccess'=>'Account Deleted...']);
         }
-
-    //request user info
-    // private function requestUserInfo($request) {
-    //     return [
-    //         'name' => $request->name,
-    //         'email' => $request->email,
-    //         'image' => $request->userImage,
-    //         'phone' => $request->phone,
-    //         'gender' => $request->gender,
-    //         'address' => $request->address,
-    //     ];
-    // }
 
     // request user data 
     private function getUserData($request) {
