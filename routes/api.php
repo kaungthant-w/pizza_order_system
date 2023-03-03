@@ -17,16 +17,24 @@ Route::get('apiTesting', function(){
 });
 
 Route::get('product/list', [RouteController::class, 'productList']);
-Route::get('category/list', [RouteController::class, 'categoryList']);
+Route::get('category/list', [RouteController::class, 'categoryList']); // READ
 
 //post
 Route::post('create/category', [RouteController::class, 'createCategory']);
-Route::post('create/contact', [RouteController::class, 'createContact']);
+Route::post('create/contact', [RouteController::class, 'createContact']); // CREATE
 // Route::post('delete/category', [RouteController::class, 'deleteCategory']);
 
 //get
-Route::get('category/delete/{id}', [RouteController::class, 'deleteCategory']);
+Route::get('category/delete/{id}', [RouteController::class, 'deleteCategory']); // DELETE
 // Route::post('category/delete/{id}', [RouteController::class, 'deleteCategory']);
+
+// Route::post('category/deails', [RouteController::class, 'categoryDetails']);
+// Route::get('category/deails/{id}', [RouteController::class, 'categoryDetails']);
+Route::get('category/list/{id}', [RouteController::class, 'categoryDetails']); //READ
+
+Route::post('category/update', [RouteController::class, 'categoryUpdate']); // UPDATE
+
+
 
 // product list
 // http://127.0.0.1:8000/api/product/list (GET)
@@ -36,3 +44,11 @@ Route::get('category/delete/{id}', [RouteController::class, 'deleteCategory']);
 
 // create category 
 // http://127.0.0.1:8000/api/category/list (POST)
+
+
+
+// http://127.0.0.1:8000/api/category/delete/{id} (GET)
+// http://127.0.0.1:8000/api/category/list/{id} (GET)
+// http://127.0.0.1:8000/api/category/update (POST)
+
+// key => category_name, category_id

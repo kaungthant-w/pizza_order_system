@@ -73,8 +73,6 @@ class RouteController extends Controller
         return response()->json($contact, 200);
     }
 
-
-
     // delete data 
     // public function deleteCategory(Request $request) {
     //     // return $request->all();
@@ -109,8 +107,44 @@ class RouteController extends Controller
         }
 
         return response()->json(['status' => false, 'message' => "There is no category"], 200);
+    }
 
-        
+    // public function categoryDetails(Request $request) {
+    //     // return $request->all();
+    //     $data = Category::where('id', $request->category_id)->first();
+
+    //     if(isset($data)) {
+    //         return response()->json(['status' => true, 'category' => $data], 200);
+    //     }
+
+    //     return response()->json(['status' => false, 'category' => "There is no category..."], 500);
+    // }
+
+    public function categoryDetails($id) {
+        $data = Category::where('id', $id)->first();
+
+        if(isset($data)) {
+            return response()->json(['status' => true, 'category' => $data], 200);
+        }
+
+        return response()->json(['status' => false, 'category' => "There is no category..."], 500);
+    }
+
+    //update category
+    public function categoryUpdate(Request $request) {
+        // return $request->all();
+        $categoryId = $request->category_id;
+
+        $dbSource = Category::where('id', $categoryId)->first();
+
+        if(isset($dbSource)) {
+            $data = $this->getCategoryData($request);
+            Category::where('id', $categoryId)->update($data);
+            $response = Category::where('id', $categoryId)->first();
+            return response()->json(['status' => true, 'message' => 'category update success...', 'category' => $response, 200]);
+        }
+
+        return response()->json(['status' => false, 'message' => "There is no category for update..."], 500);
     }
 
     // get contact data
@@ -121,6 +155,14 @@ class RouteController extends Controller
             'message' => $request->message,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
+        ];
+    }
+
+    // get category data
+    private function getCategoryData($request) {
+        return [
+            'name' => $request->category_name,
+            'updated_at' => Carbon::now(),
         ];
     }
 }
