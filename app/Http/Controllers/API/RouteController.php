@@ -62,6 +62,7 @@ class RouteController extends Controller
         // dd($request->header('headerData'));
     }
 
+    // create contact
     public function createContact(Request $request) {
         // return $request -> all();
 
@@ -72,6 +73,47 @@ class RouteController extends Controller
         return response()->json($contact, 200);
     }
 
+
+
+    // delete data 
+    // public function deleteCategory(Request $request) {
+    //     // return $request->all();
+
+    //     $data = Category::where('id', $request->category_id)->first();
+    //     // return $data;
+
+    //     // return isset($data);
+    //     // return empty($data);
+    //     // return !empty($data);
+
+    //     // dd(isset($data));
+    //     if(isset($data)) {
+    //         Category::where('id', $request->category_id)->delete();
+    //         return response()->json(['status' => true, 'message' => "delete success"], 200);
+    //     }
+
+    //     return response()->json(['status' => false, 'message' => "There is no category"], 200);
+
+        
+    // }
+
+    public function deleteCategory($id, Request $request) {
+        // return $id;
+        // return $request->all();
+        $data = Category::where('id', $id)->first();
+        // dd(isset($data));
+
+        if(isset($data)) {
+            Category::where('id', $id)->delete();
+            return response()->json(['status' => true, 'message' => "delete success"], 200);
+        }
+
+        return response()->json(['status' => false, 'message' => "There is no category"], 200);
+
+        
+    }
+
+    // get contact data
     private function getContactData($request) {
         return [
             'name' => $request->name,

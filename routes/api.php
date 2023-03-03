@@ -22,6 +22,11 @@ Route::get('category/list', [RouteController::class, 'categoryList']);
 //post
 Route::post('create/category', [RouteController::class, 'createCategory']);
 Route::post('create/contact', [RouteController::class, 'createContact']);
+// Route::post('delete/category', [RouteController::class, 'deleteCategory']);
+
+//get
+Route::get('category/delete/{id}', [RouteController::class, 'deleteCategory']);
+// Route::post('category/delete/{id}', [RouteController::class, 'deleteCategory']);
 
 // product list
 // http://127.0.0.1:8000/api/product/list (GET)
